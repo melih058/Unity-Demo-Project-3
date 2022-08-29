@@ -9,6 +9,7 @@ public class WaxCreator : MonoBehaviour
     public int waxLayerMask;
     public int hairLayerMask;
     public Transform waxParent;
+    public Transform waxStick;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,8 @@ public class WaxCreator : MonoBehaviour
         if (Physics.Raycast(ray, out hit, 50f, 1 << bodyLayerMask))
         {
             Vector3 pos = hit.point;
+            waxStick.position = pos;
+            waxStick.up = hit.normal;
             Collider[] colliders = Physics.OverlapSphere(pos, 0.015f, 1 << waxLayerMask);
             if (colliders.Length == 0)
             {
